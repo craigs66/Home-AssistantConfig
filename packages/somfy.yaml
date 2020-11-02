@@ -1,0 +1,7 @@
+########
+#  Somfy MyLink
+#######
+
+somfy_mylink: 
+  host: 10.10.2.20
+  system_id: somfymylink

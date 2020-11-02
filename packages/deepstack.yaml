@@ -1,0 +1,65 @@
+image_processing:
+  - platform: deepstack_object
+    ip_address: !secret deepstackip
+    port: 5000
+    api_key: !secret deepstackapi
+    save_file_folder: /config/www/deepstack_person_images/frontyard/
+    save_timestamped_file: True
+    confidence: 50
+    targets:
+      - person
+    source:
+      - entity_id: camera.front_yard
+        name: person_detector_front_yard
+
+  - platform: deepstack_object
+    ip_address: !secret deepstackip
+    port: 5000
+    api_key: !secret deepstackapi
+    save_file_folder: /config/www/deepstack_person_images/frontdoor/
+    save_timestamped_file: True
+    confidence: 50
+    targets:
+      - person
+    source:
+      - entity_id: camera.front_door
+        name: person_detector_front_door
+
+  - platform: deepstack_object
+    ip_address: !secret deepstackip
+    port: 5000
+    api_key: !secret deepstackapi
+    save_file_folder: /config/www/deepstack_person_images/backyard/
+    save_timestamped_file: True
+    confidence: 50
+    targets:
+      - person
+    source:
+      - entity_id: camera.backyard
+        name: person_detector_backyard
+
+  - platform: deepstack_object
+    ip_address: !secret deepstackip
+    port: 5000
+    api_key: !secret deepstackapi
+    save_file_folder: /config/www/deepstack_person_images/garage/
+    save_timestamped_file: True
+    confidence: 50
+    targets:
+      - person
+    source:
+      - entity_id: camera.garage_2
+        name: person_detector_garage
+
+  - platform: deepstack_face
+    ip_address: !secret deepstackip
+    port: 5000
+    api_key: !secret deepstackapi
+    timeout: 5
+    detect_only: False
+    save_file_folder: /config/www/deepstack_person_images/frontyard/
+    save_timestamped_file: True
+    show_boxes: True
+    source:
+      - entity_id: camera.front_yard
+        name: person_front_yard

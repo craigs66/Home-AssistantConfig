@@ -1,0 +1,75 @@
+#################################################################
+## Sensors
+#################################################################
+
+        ##########################################################
+        ## Pihole Status
+        ##########################################################
+
+  - platform: command_line
+    name: PiHole Status
+    command: curl -X GET 'http://10.10.2.29/admin/api.php?status'
+    value_template: "{{ value_json.status == 'enabled' }}"
+
+        ##########################################################
+        ## Waze Travel Time
+        ##########################################################
+
+  - platform: waze_travel_time
+    name: Lisa To Home
+    origin: person.lisa
+    destination: zone.home
+    region: 'US'
+  - platform: waze_travel_time
+    name: Craig To Home
+    origin: person.craig
+    destination: zone.home
+    region: 'US'
+  - platform: waze_travel_time
+    name: Craig To Work
+    origin: person.craig
+    destination: zone.craig_work
+    region: 'US'
+  - platform: waze_travel_time
+    name: Lisa To Work
+    origin: person.lisa
+    destination: zone.lisa_work
+    region: 'US'
+
+        ##########################################################
+        ## Darksky Weather
+        ##########################################################
+
+  - platform: darksky
+    api_key: !secret darksky_key
+    monitored_conditions:
+      - summary
+      - minutely_summary
+      - hourly_summary
+      - daily_summary
+#     - icon
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - precip_type
+      - precip_intensity
+      - precip_probability
+      - temperature
+      - apparent_temperature
+      - dew_point
+      - wind_speed
+      - wind_bearing
+      - cloud_cover
+      - humidity
+      - pressure
+      - visibility
+      - ozone
+
+        ##########################################################
+        ## Zillow
+        ##########################################################
+
+  - platform: zestimate
+    api_key: !secret zillow_zwsid
+    zpid:
+      - 58312244
+      - 87136016

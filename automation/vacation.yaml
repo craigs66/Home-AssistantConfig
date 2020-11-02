@@ -1,0 +1,143 @@
+#################################################################
+## Vacation Mode Automations
+#################################################################
+
+        ##########################################################
+        ## Turn on Vacation Mode when Gone 12 Hours
+        ##########################################################
+
+- alias: Vacation - Turn on when Gone 12 Hours
+
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: 'away'
+      for:
+        hours: 12
+        minutes: 0
+        seconds: 0
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.disable_home_away
+      state: 'off'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.vacation_mode
+
+        ##########################################################
+        ## Turn off Vacation Mode when Home
+        ##########################################################
+
+- alias: Vacation - Turn off when Home
+
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: 'away'
+      to: 'home'
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.disable_home_away
+      state: 'off'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.vacation_mode
+
+        ##########################################################
+        ## Turn on Vacation Mode when on Vacation
+        ##########################################################
+
+- alias: Vacation - Turn on when on Vacation
+
+  trigger:
+    - platform: state
+      entity_id: device_tracker.iphone
+      from: 'away'
+      to: 'vacation'
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.disable_home_away
+      state: 'off'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.vacation_mode
+
+        ##########################################################
+        ## Vacation Mode Scene
+        ##########################################################
+
+- alias: Vacation - Scene
+
+  trigger:
+    - platform: state
+      entity_id: sun.sun
+      from: 'above_horizon'
+      to: 'below_horizon'
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'on'
+
+  action:
+    - service: scene.turn_on
+      entity_id: scene.vacation
+
+        ##########################################################
+        ## Vacation Mode Lights off at Midnight
+        ##########################################################
+
+- alias: Vacation - Lights Off Midnight
+
+  trigger:
+    - platform: time
+      at: '23:16'
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.vacation_mode
+      state: 'on'
+
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.family_room_lamp
+        - light.upstairs_tv_room_2
+
+        ##########################################################
+        ## Vacation Mode Disable Automations
+        ##########################################################
+
+#- alias: Vacation - Disable Automation
+#
+#  trigger:
+#    - platform: state
+#      entity_id: input_boolean.vacation_mode
+#      from: 'off'
+#      to: 'on'
+#
+#  action:
+#    - service: scene.turn_on
+#      entity_id: scene.vacation_disable_automation
+
+        ##########################################################
+        ## Vacation Mode Enable Automations
+        ##########################################################
+
+#- alias: Vacation - Enable Automation
+#
+#  trigger:
+#    - platform: state
+#      entity_id: input_boolean.vacation_mode
+#      from: 'on'
+#      to: 'off'
+
+#  action:
+#    - service: scene.turn_on
+#      entity_id: scene.vacation_enable_automation

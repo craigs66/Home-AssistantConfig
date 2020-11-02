@@ -1,0 +1,26 @@
+#################################################################
+## Customize
+#################################################################
+
+        ##########################################################
+        ##  Garage Door
+        ##########################################################
+
+  cover.lisa_garage:
+    device_class: garage
+
+  cover.craig_garage:
+    device_class: garage
+
+        ##########################################################
+        ## Device Trackers
+        ##########################################################
+
+  person.craig:
+    entity_picture: /local/Craig.jpg
+
+  person.lisa:
+    entity_picture: /local/Lisa.jpg
+
+  person.amanda:
+    entity_picture: /local/Amanda.jpg

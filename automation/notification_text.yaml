@@ -1,0 +1,108 @@
+#################################################################
+## Notifications
+#################################################################
+
+# Person detection from Deepstack service
+# - alias: Telegram Notification - Person Detected in Front Yard
+#  trigger:
+#    platform: event
+#    event_type: folder_watcher
+#    event_data:
+#      event_type: modified
+#      path: '/config/www/deepstack_person_images/frontyard/person_detector_front_yard_latest.jpg'
+#  action:
+#    service: telegram_bot.send_photo
+#    data_template:
+#      file: '/config/www/deepstack_person_images/frontyard/person_detector_front_yard_latest.jpg'
+#      caption: Front Yard Person Detected
+
+- alias: Telegram Notification - Person Detected at Front Door
+  trigger:
+    platform: event
+    event_type: folder_watcher
+    event_data:
+      event_type: modified
+      path: '/config/www/deepstack_person_images/frontdoor/person_detector_front_door_latest.jpg'
+  action:
+    service: telegram_bot.send_photo
+    data_template:
+      file: '/config/www/deepstack_person_images/frontdoor/person_detector_front_door_latest.jpg'
+      caption: Front Door Person Detected
+
+- alias: Telegram Notification - Person Detected in Garage
+  trigger:
+    platform: event
+    event_type: folder_watcher
+    event_data:
+      event_type: modified
+      path: '/config/www/deepstack_person_images/garage/person_detector_garage_latest.jpg'
+  action:
+    service: telegram_bot.send_photo
+    data_template:
+      file: '/config/www/deepstack_person_images/garage/person_detector_garage_latest.jpg'
+      caption: Garage Person Detected
+
+- alias: Telegram Notification - Person Detected in Backyard
+  trigger:
+    platform: event
+    event_type: folder_watcher
+    event_data:
+      event_type: modified
+      path: '/config/www/deepstack_person_images/backyard/person_detector_backyard_latest.jpg'
+  action:
+    service: telegram_bot.send_photo
+    data_template:
+      file: '/config/www/deepstack_person_images/backyard/person_detector_backyard_latest.jpg'
+      caption: Backyard Person Detected
+
+        #################################################################
+        ## Lisa Garage Door Still Open Notification
+        #################################################################
+
+- alias: Notification Text - Lisa Garage Door Still Open
+
+  trigger:
+    - platform: state
+      entity_id: cover.lisa_garage
+      to: 'open'
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.disable_notifications
+      state: 'off'
+
+  action:
+    service: telegram_bot.send_photo
+    data_template:
+      url: 'http://10.10.2.2/snap.jpeg'
+      caption: Lisa Garage Still Open!
+
+        #################################################################
+        ## Craig Garage Door Still Open Notification
+        #################################################################
+
+- alias: Notification Text - Craig Garage Door Still Open
+
+  trigger:
+    - platform: state
+      entity_id: cover.craig_garage
+      to: 'open'
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.disable_notifications
+      state: 'off'
+
+  action:
+    service: telegram_bot.send_photo
+    data_template:
+      url: 'http://10.10.2.2/snap.jpeg'
+      caption: Craig Garage Still Open!

@@ -1,0 +1,99 @@
+#########
+## Scripts
+########
+
+test_telegram:
+  alias: 'test_telegram'
+  sequence:
+    - event: LOGBOOK_ENTRY
+      event_data:
+        name: Telegram
+        message: is running a test
+    - service: notify.telegram
+      data:
+       title: TEST MESSAGE
+       message: 'This is a test!'
+       data:
+        photo:
+         - url: https://i.pinimg.com/originals/c1/55/a1/c155a1b393899ffd7c36ff01090ce8f5.jpg
+
+
+######################################################################################################
+###Script to shut switches with a 30 second delay to not trample codes
+###  Sample Call
+#  action:
+#   - service: script.interior_off
+######################################################################################################
+
+interior_off:
+  sequence:
+    - service: light.turn_off
+      entity_id: group.interior_lights
+    - service: switch.turn_off
+      entity_id: group.interior_switches
+    - service: switch.turn_off
+      entity_id: group.garage_switches
+#    - service: media_player.turn_off
+#      entity_id:
+#        - group.media_players
+#    - service: ifttt.trigger
+#      data_template: {"event":"noon_off"}
+
+#########
+## Sonos
+########
+
+say:
+  alias: Sonos TTS
+  sequence:
+    - service: media_player.sonos_snapshot
+      data_template:
+        with_group: yes
+    - delay: '00:00:03'
+    - service: media_player.sonos_unjoin
+      data_template:
+        entity_id: "{{ where }}"
+    - delay: '00:00:01'
+    - service: media_player.sonos_join
+      data_template:
+        master: "{{ master }}"
+        entity_id: "{{ where }}"
+    - delay: '00:00:01'
+    - service: media_player.volume_set
+      data_template:
+        entity_id: "{{ where }}"
+        volume_level: "{{ volume }}"
+    - delay: '00:00:02'
+    - service: tts.amazon_polly_say
+      data_template:
+        entity_id: "{{ master }}"
+        message: "{{ what }}"
+    - delay: '00:00:25'
+    - service: media_player.sonos_restore
+      data_template:
+        with_group: yes
+
+######################################################################################################
+###Script to shut switches with a 30 second delay to not trample codes
+###  Sample Call
+#  action:
+#   - service: script.switch_turn_off_all
+######################################################################################################
+
+switch_turn_off_all:
+  sequence:
+    - service: switch.turn_off
+      entity_id: group.interior_switches
+    - service: switch.turn_off
+      entity_id: group.garage_switches
+
+#######
+## Lannouncer
+#######
+
+# test_lannouncer:
+#  alias: Lannouncer Test
+#  sequence:
+#    - service: notify.laundry_room_lannouncer
+#      data:
+#        message: 'LISA! Casa Del Vino wishes you a great day! Please be safe out there.'

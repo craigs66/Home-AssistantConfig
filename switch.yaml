@@ -1,0 +1,15 @@
+#################################################################
+##  Switches
+#################################################################
+
+#	##########################################################
+#       ## Pihole #1 Disable Switch
+#       ##########################################################
+
+- platform: command_line 
+  switches: 
+    pihole_switch: 
+      command_on: "curl -X GET 'http://10.10.2.29/admin/api.php?enable&auth=57bac235d98833fae10a2b9a86d6ea852f48dea1ae4b353e7da09a1b2daa55df'"
+      command_off: "curl -X GET 'http://10.10.2.29/admin/api.php?disable=1800&auth=57bac235d98833fae10a2b9a86d6ea852f48dea1ae4b353e7da09a1b2daa55df'"
+      command_state: "curl -X GET 'http://10.10.2.29/admin/api.php?status'"
+      value_template: "{{ value_json.status == 'enabled' }}"

@@ -1,0 +1,51 @@
+- alias: image processing front yard
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.motion_front_yard
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: image_processing.person_detector_front_yard
+    service: image_processing.scan
+
+- alias: image processing front door
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.motion_front_door
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: image_processing.person_detector_front_door
+    service: image_processing.scan
+
+- alias: image processing backyard
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.motion_backyard
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: image_processing.person_detector_backyard
+    service: image_processing.scan
+
+- alias: image processing garage
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.motion_garage
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data: {}
+    entity_id: image_processing.person_detector_garage
+    service: image_processing.scan

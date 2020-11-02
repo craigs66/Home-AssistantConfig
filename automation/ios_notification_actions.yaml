@@ -1,0 +1,120 @@
+#################################################################
+## iOS Actionable Notifications
+#################################################################
+
+
+        #################################################################
+        ## Close Lisa Garage
+        #################################################################
+
+- alias: iOS Action - Close Lisa Garage
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CLOSE_LISA_GARAGE
+
+  action:
+    - service: cover.close_cover
+      entity_id: cover.lisa_garage
+
+        #################################################################
+        ## Close Craig Garage
+        #################################################################
+
+- alias: iOS Action - Close Craig Garage
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: CLOSE_CRAIG_GARAGE
+
+  action:
+    - service: cover.close_cover
+      entity_id: cover.craig_garage
+
+        #################################################################
+        ## Open Lisa Garage
+        #################################################################
+
+- alias: iOS Action - Open Lisa Garage
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OPEN_LISA_GARAGE
+
+  action:
+    - service: cover.open_cover
+      entity_id: cover.lisa_garage
+
+       #################################################################
+       ## Open Craig Garage
+       #################################################################
+
+- alias: iOS Action - Open Craig Garage
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: OPEN_CRAIG_GARAGE
+
+  action:
+    - service: cover.open_cover
+      entity_id: cover.craig_garage
+
+        #################################################################
+        ## Sound Alarm
+        #################################################################
+
+- alias: iOS Action - Sound Alarm
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SOUND_ALARM
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.alarm_tripped
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.panic_mode
+
+        #################################################################
+        ## Sound Alarm
+        #################################################################
+
+- alias: iOS Action - Sound Alarm
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SOUND_ALARM
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.alarm_tripped
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.panic_mode
+
+        #################################################################
+        ## Disable Fire Alarm
+        #################################################################
+
+- alias: iOS Action - Disable Smoke Alarm
+
+  trigger:
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: SMOKEALARM_OFF
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.disable_smoke_alarm

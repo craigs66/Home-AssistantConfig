@@ -1,0 +1,123 @@
+#################################################################
+## Media Player Automations
+#################################################################
+
+
+      #################################################################
+      ## Reset Sonos Every Morning
+      #################################################################
+
+- alias: Media - Reset Sonos Every Morning
+
+  trigger:
+    - platform: time
+      at: '04:00'
+
+  action:
+    - service: sonos.unjoin
+      entity_id:
+        - media_player.sonos_bathroom
+        - media_player.sonos_family_room_2
+        - media_player.sonos_garage
+        - media_player.sonos_kitchen
+        - media_player.sonos_kitchen_2
+        - media_player.sonos_master_bedroom_2
+        - media_player.sonos_tv_playbar
+        - media_player.sonos_upstairs
+        - media_player.sonos_wine_room
+    - service: media_player.clear_playlist
+      entity_id:
+        - media_player.sonos_bathroom
+        - media_player.sonos_family_room_2
+        - media_player.sonos_garage
+        - media_player.sonos_kitchen
+        - media_player.sonos_kitchen_2
+        - media_player.sonos_master_bedroom_2
+        - media_player.sonos_tv_playbar
+        - media_player.sonos_upstairs
+        - media_player.sonos_wine_room
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.justin_timberlake_music
+        - input_boolean.miranda_lambert_music
+        - input_boolean.live_acoustic_music
+        - input_boolean.group_all_sonos
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.sonos
+        option: "None"
+
+        ##########################################################
+        ## Group All Sonos
+        ##########################################################
+
+- alias: Media - Group All Sonos
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.group_all_sonos
+      from: 'off'
+      to: 'on'
+
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: 'home'
+
+  action:
+    - service: sonos.join
+      data:
+        master: media_player.sonos_family_room_2
+      entity_id:
+        - media_player.sonos_bathroom
+        - media_player.sonos_family_room_2
+        - media_player.sonos_garage
+        - media_player.sonos_kitchen
+        - media_player.sonos_kitchen_2
+        - media_player.sonos_master_bedroom_2
+        - media_player.sonos_tv_playbar
+        - media_player.sonos_upstairs
+        - media_player.sonos_wine_room
+
+        ##########################################################
+        ## Play Justin Timberlake Pandora Station
+        ##########################################################
+
+- alias: Media - Play Justin Timberlake Station
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.justin_timberlake_music
+      from: 'off'
+      to: 'on'
+
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: 'home'
+
+  action:
+    - service: sonos.join
+      data:
+        master: media_player.sonos_bathroom
+      entity_id:
+        - media_player.sonos_bathroom
+    - delay: '00:00:02'
+    - service: media_player.volume_set
+      entity_id:
+        - media_player.sonos_bathroom
+      data:
+        volume_level: '0.4'
+    - delay: '00:00:01'
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sonos_bathroom
+        source: 'Justin Timberlake Radio'
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.miranda_lambert_music
+        - input_boolean.live_acoustic_music
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.sonos
+        option: "Play Justin Timberlake Station"

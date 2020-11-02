@@ -1,0 +1,492 @@
+title: Casa Del Vino
+# Include external resources
+resources:
+  - url: /local/mini-graph-card-bundle.js?v=0.9.3
+    type: module
+#  - url: /local/mini-media-player-bundle.js?v=1.0.3
+#    type: module
+
+views:
+    # View tab title.
+  - title: Main Page
+    cards:
+
+# The picture is set in customize/other.yaml
+
+      - type: glance
+        entities:
+          - person.lisa
+          - person.craig
+#          - device_tracker.iphone_3
+
+      - type: thermostat
+        entity: climate.family_room
+        name: 'Family Room Nest'
+
+      - type: thermostat
+        entity: climate.upstairs_nest
+        name: 'Upstairs Nest'
+
+      - type: weather-forecast
+        entity: weather.casa_del_vino
+        name: 'Austin, TX'
+
+      - type: picture-entity
+        title: Front Door
+        camera_view: live
+        entity: camera.front_door_camera
+
+      - type: entities
+        title: Travel Times
+        show_header_toggle: false
+        entities:
+          - sensor.craig_to_home
+          - sensor.lisa_to_home
+          - sensor.lisa_to_work
+          - sensor.craig_to_work
+
+      - type: entities
+        title: Lisa Leave for Work
+        show_header_toggle: false
+        entities:
+          - input_boolean.lisa_garage_door
+
+      - cards:
+          - entity: media_player.sonos_bathroom
+            type: media-control
+        type: horizontal-stack
+
+      - type: glance
+        entities:
+          - sensor.zestimate_5000_mission_oaks_blvd_unit_51
+          - sensor.zestimate_none
+        title: Zestimate of House and Beach House
+
+      - type: glance
+        show_icon: true
+        show_name: true
+        show_state: true
+        title: Worldwide
+
+        entities:
+          - entity: sensor.worldwide_coronavirus_confirmed
+            icon: 'mdi:emoticon-neutral-outline'
+            name: Confirmed
+          - entity: sensor.worldwide_coronavirus_current
+            icon: 'mdi:emoticon-frown-outline'
+            name: Current
+          - entity: sensor.worldwide_coronavirus_recovered
+            icon: 'mdi:emoticon-happy-outline'
+            name: Recovered
+          - entity: sensor.worldwide_coronavirus_deaths
+            icon: 'mdi:emoticon-dead-outline'
+            name: Deaths
+
+      - cards:
+        - animate: true
+          icon: 'mdi:allergy'
+          decimals: 0
+          entities:
+            - entity: sensor.worldwide_coronavirus_confirmed
+              name: Confirmed
+              color: green
+            - entity: sensor.worldwide_coronavirus_current
+              name: Current
+              color: blue
+            - entity: sensor.worldwide_coronavirus_recovered
+              name: Recovered
+              color: pink
+            - entity: sensor.worldwide_coronavirus_deaths
+              name: Deaths
+              color: red
+          extrema: true
+          font_size: 100
+          font_size_header: 15
+          hour24: true
+          hours_to_show: 240
+          line_color: '#E53935'
+          name: Worldwide Corona
+          points_per_hour: 5
+          show:
+            fill: fade
+            points: false
+          type: 'custom:mini-graph-card'
+        - animate: true
+          icon: 'mdi:allergy'
+          decimals: 0
+          entities:
+            - entity: sensor.us_coronavirus_confirmed
+              name: Confirmed
+              color: green
+            - entity: sensor.us_coronavirus_current
+              name: Current
+              color: blue
+            - entity: sensor.us_coronavirus_recovered
+              name: Recovered
+              color: pink
+            - entity: sensor.us_coronavirus_deaths
+              name: Deaths
+              color: red
+          extrema: true
+          font_size: 100
+          font_size_header: 15
+          hour24: true
+          hours_to_show: 240
+          line_color: '#E53935'
+          name: US Corona
+          points_per_hour: 5
+          show:
+            fill: fade
+            points: false
+          type: 'custom:mini-graph-card'
+        type: horizontal-stack
+#    type: vertical-stack
+
+  - badges: []
+    cards:
+      - cards:
+          - entity: sensor.casa_del_vino_realfeel_temperature
+            name: 'Feels Like Temp in Austin, TX'
+            type: weather-forecast
+          - entities:
+              - entity: sensor.casa_del_vino_precipitation
+                name: Precipitation
+              - entity: sensor.casa_del_vino_thunderstorm_probability_day_0d
+                name: Chance of Rain Today
+              - entity: sensor.casa_del_vino_thunderstorm_probability_day_1d
+                name: Chance of Rain Tomorrow
+              - entity: sensor.casa_del_vino_cloud_ceiling
+                name: Cloud Ceiling
+              - entity: sensor.casa_del_vino_pressure_tendency
+                name: Pressure
+            show_header_toggle: false
+            title: Weather Summary
+            type: entities
+          - image: >-
+              https://radblast.wunderground.com/cgi-bin/radar/WUNIDS_map?station=EWX&brand=wui&num=10&delay=15&type=N0R&frame=0&scale=1.000&noclutter=1&showstorms=0&mapx=400&mapy=240&centerx=400&centery=240&transx=0&transy=0&showlabels=1&severe=0&rainsnow=0&lightning=0&smooth=0&rand=26233815&lat=0&lon=0&label=you
+            type: picture
+        type: vertical-stack
+      - entities:
+          - entity: climate.family_room
+          - entity: sensor.family_room_thermostat_operation_mode
+          - entity: sensor.family_room_thermostat_hvac_state
+          - entity: climate.upstairs_nest
+          - entity: sensor.upstairs_thermostat_nest_operation_mode
+          - entity: sensor.upstairs_thermostat_nest_hvac_state
+          - entity: weather.casa_del_vino
+        show_header_toggle: false
+        title: Climate Control
+        type: entities
+      - cards:
+          - entities:
+              - entity: sensor.family_room_thermostat_temperature
+                name: Living Room
+              - entity: sensor.upstairs_thermostat_nest_temperature
+                name: Upstairs
+            show_header_toggle: false
+            title: Indoor Temperature
+            type: entities
+          - entities:
+              - entity: sensor.family_room_thermostat_humidity
+                name: Family Room
+              - entity: sensor.upstairs_thermostat_nest_humidity
+                name: Upstairs
+              - entity: sensor.dark_sky_humidity
+                name: Outdoor
+            title: Humidity
+            type: glance
+        type: vertical-stack
+    path: weatherdashboard
+    title: Weather
+    icon: mdi:weather-partly-snowy-rainy
+
+  - title: cameras
+    icon: mdi:cctv
+    cards:
+      - type: picture-entity
+        title: Back Yard
+        camera_view: live
+        show_state: false
+        entity: camera.backyard
+      - type: picture-entity
+        title: Garage
+        camera_view: live
+        show_state: false
+        entity: camera.garage_2
+      - type: picture-entity
+        title: Front Yard
+        camera_view: live
+        show_state: false
+        entity: camera.front_yard_camera
+      - type: picture-entity
+        title: Front Door
+        camera_view: live
+        entity: camera.front_door_camera
+
+  - title: Lights
+    cards:
+      - type: entities
+        title: Lights
+        show_header_toggle: true
+        entities:
+          - light.kitchen_main
+          - light.kitchen_table
+          - light.dining_room
+          - light.family_room_lamp
+          - light.upstairs_tv_room_3
+          - light.closest_to_front_door
+          - light.closest_to_laundry
+          - light.upstairs_tv_room_2
+          - light.upstairs_tv_room_1
+          - light.bathroom
+          - light.lamp_on_lisas_side
+          - light.lamp_on_craigs_side
+          - light.fireplace
+          - light.front_porch_yeelight
+
+      - type: entities
+        title: Switches
+        show_header_toggle: true
+        entities:
+          - switch.front_porch
+          - switch.back_patio
+          - switch.012008286001949488f8
+          - switch.garage_light
+          - switch.backyardpartylights
+#          - switch.front_porch_fountain
+
+  - title: Sensors
+    cards:
+      - type: entities
+        title: Konnected Sensors
+        show_header_toggle: false
+        entities:
+          - switch.siren
+          - binary_sensor.front_door
+          - binary_sensor.garage_door
+          - binary_sensor.back_door
+          - binary_sensor.dining_room_left_window
+          - binary_sensor.dining_room_right_window
+          - binary_sensor.family_room_windows
+          - binary_sensor.kitchen_left_back_window
+          - binary_sensor.kitchen_right_back_window
+          - binary_sensor.kitchen_left_side_window
+          - binary_sensor.kitchen_right_side_window
+          - binary_sensor.master_bedroom_left_window
+          - binary_sensor.upstairs_windows
+          - binary_sensor.wine_room_left_window
+          - binary_sensor.wine_room_right_window
+
+      - type: entities
+        title: Pi-Hole DNS
+        show_header_toggle: false
+        entities:
+          - entity: switch.pihole_switch
+            icon: 'mdi:power'
+            name: 'DNS Ad Blocker'
+          - entity: sensor.pihole_status
+            icon: 'mdi:dns'
+            name: 'DNS Ad Blocker Enabled'
+          - entity: sensor.pi_hole_dns_queries_today
+            name: 'DNS Queries'
+          - entity: sensor.pi_hole_ads_blocked_today
+            name: 'DNS Ads Blocked'
+          - entity: sensor.pi_hole_ads_percentage_blocked_today
+            name: 'DNS Percentage Blocked'
+
+      - type: entities
+        title: Window Shades
+        show_header_toggle: true
+        entities:
+          - cover.all_shades
+          - cover.side_kitchen_windows
+          - cover.back_kitchen_windows
+          - cover.back_door
+          - cover.family_room_windows
+
+      - type: entities
+        title: Garage Doors
+        show_header_toggle: false
+        entities:
+          - cover.craig_garage
+          - cover.lisa_garage
+
+      - type: entities
+        title: Bed
+        show_header_toggle: false
+        entities:
+          - binary_sensor.sleepnumber_craig_craig_is_in_bed
+          - binary_sensor.sleepnumber_craig_lisa_is_in_bed
+          - sensor.sleepnumber_craig_craig_sleepnumber
+          - sensor.sleepnumber_craig_lisa_sleepnumber
+
+  - badges: []
+    cards:
+      - entities:
+          - input_select.family_room_remote
+          - input_select.sonos
+          - input_boolean.group_all_sonos
+        show_header_toggle: false
+        title: Remote
+        type: entities
+#      - cards:
+#          - entity: media_player.appletv_master_bedroom_2
+#            show_info: false
+#            type: media-control
+#          - entity: media_player.appletv_family_room
+#            show_info: false
+#            type: media-control
+#          - entity: media_player.appletv_upstairs
+#            show_info: false
+#            type: media-control
+#          - entity: media_player.appletv_amandas_room
+#            show_info: false
+#            type: media-control
+#          - entity: media_player.appletv_guest_bedroom
+#            show_info: false
+#            type: media-control
+#        type: vertical-stack
+      - cards:
+          - cards:
+              - entity: media_player.sonos_bathroom
+                type: media-control
+              - entity: media_player.sonos_master_bedroom_2
+                type: media-control
+            type: horizontal-stack
+          - cards:
+              - entity: media_player.sonos_kitchen_2
+                type: media-control
+              - entity: media_player.sonos_kitchen
+                type: media-control
+            type: horizontal-stack
+          - cards:
+              - entity: media_player.sonos_garage
+                type: media-control
+              - entity: media_player.sonos_wine_room
+                type: media-control
+            type: horizontal-stack
+        type: vertical-stack
+      - cards:
+          - cards:
+              - entity: media_player.sonos_family_room_2
+                type: media-control
+              - entity: media_player.sonos_tv_playbar
+                type: media-control
+            type: horizontal-stack
+          - cards:
+              - entity: media_player.sonos_upstairs
+                type: media-control
+            type: horizontal-stack
+        type: vertical-stack
+    icon: 'mdi:play-circle-outline'
+    path: media
+    title: Media
+#  - title: Music
+#    icon: mdi:music
+#    cards:
+#      - type: custom:mini-media-player
+#        entity: media_player.kitchen
+#        hide:
+#          icon: true
+#        sonos:
+#          show_group_count: true
+#          entities:
+#            - entity_id: media_player.kitchen
+#              name: Sonos Kitchen
+#            - entity_id: media_player.family_room_2
+#              name: Sonos Family Room
+#            - entity_id: media_player.garage
+#              name: Sonos Garage
+#            - entity_id: media_player.kitchen_2
+#              name: Sonos Kitchen 2
+#            - entity_in: media_player.master_bedroom_2
+#              name: Sonos Master Bedroom
+#            - entity_in: media_player.upstairs
+#              name: Sonos Upstairs
+#            - entity_id: media_player.wine_room
+#              name: Sonos Wine Room
+#
+#      - type: custom:mini-media-player
+#        entity: media_player.bathroom
+
+  - cards:
+    - entities:
+      - {entity: sensor.speedtest_download, name: Download Speed}
+      - {entity: sensor.speedtest_upload, name: Upload Speed}
+      - {entity: sensor.speedtest_ping, name: Ping}
+      hours_to_show: 168
+      type: history-graph
+    - entities:
+      - sensor.synology_total_size_volume_1
+      - sensor.synology_used_space_volume_1
+      - sensor.synology_volume_used_volume_1
+      type: glance
+    - entities:
+      - sensor.hp_officejet_pro_9020_series_black_cartridge
+      - sensor.hp_officejet_pro_9020_series_cyan_cartridge
+      - sensor.hp_officejet_pro_9020_series_magenta_cartridge
+      - sensor.hp_officejet_pro_9020_series_yellow_cartridge
+      type: glance
+
+    - entity: script.test_telegram
+      icon: 'mdi:movie'
+      tap_action:
+        action: call-service
+        service: script.turn_on
+        service_data:
+          entity_id: script.test_telegram
+      type: entity
+
+    - type: picture-glance
+      title: Front Yard
+      entities:
+        - image_processing.person_detector_front_yard
+      image: /local/deepstack_person_images/frontyard/person_detector_front_yard_latest.jpg
+
+    - type: picture-glance
+      title: Front Door
+      entities:
+        - image_processing.person_detector_front_door
+      image: /local/deepstack_person_images/frontdoor/person_detector_front_door_latest.jpg
+
+    - type: picture-glance
+      title: Backyard
+      entities:
+        - image_processing.person_detector_backyard
+      image: /local/deepstack_person_images/backyard/person_detector_backyard_latest.jpg
+
+    - type: picture-glance
+      title: Garage
+      entities:
+        - image_processing.person_detector_garage
+      image: /local/deepstack_person_images/garage/person_detector_garage_latest.jpg
+
+    - type: glance
+      entities:
+        - image_processing.person_detector_front_yard
+    icon: mdi:lan
+    path: network
+    title: Network
+
+  - badges: []
+    cards:
+      - entities:
+          - input_boolean.good_night
+          - input_boolean.lisa_away
+          - input_boolean.craig_away
+          - input_boolean.lisa_home
+          - input_boolean.craig_home
+          - input_boolean.manual_lisa_away
+          - input_boolean.manual_craig_away
+          - input_boolean.vacation_mode
+          - input_boolean.guest_mode
+          - input_boolean.disable_home_away
+          - input_boolean.lisa_greeting
+          - input_boolean.david_greeting
+          - input_boolean.disable_notifications
+        show_header_toggle: false
+        title: Location Controls
+        type: entities
+    icon: 'mdi:robot'
+    path: automation
+    title: Automation

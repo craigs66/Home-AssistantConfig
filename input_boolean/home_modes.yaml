@@ -1,0 +1,9 @@
+text_notifications:
+  name: Text Notifications
+  icon: mdi:cellphone-wireless
+  initial: on
+
+guest_mode:
+  name: Guest Mode
+  icon: mdi:account-alert
+  initial: off

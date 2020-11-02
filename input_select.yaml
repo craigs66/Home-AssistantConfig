@@ -1,0 +1,36 @@
+#################################################################
+## Input Select
+#################################################################
+
+  holiday:
+    name: Holiday Lighting
+    options:
+      - None
+      - Valentine's Day
+      - St. Patrick's Day
+      - Easter
+      - Memorial Day
+      - Independence Day
+      - Labor Day
+      - Halloween
+      - Veterans Day
+      - Thanksgiving
+      - Christmas
+      - New Year's Eve
+    icon: mdi:gift
+
+  family_room_remote:
+    name: Family Room Remote
+    options:
+      - PowerOff
+      - Watch TV
+    icon: mdi:remote
+
+  sonos:
+    name: Sonos
+    options:
+      - None
+      - Play Justin Timberlake Station
+      - Play Miranda Lambert Station
+      - Play Live and Acoustic Station
+    icon: mdi:speaker

@@ -1,0 +1,32 @@
+Master Bedroom lights:
+  entities:
+    - light.lamp_on_lisas_side
+    - light.lamp_on_craigs_side
+
+Master Bathroom lights:
+  entities:
+    - light.bathroom
+
+Dining Room lights:
+  entities:
+    - light.dining_room
+
+Living Room lights:
+  entities:
+    - light.fireplace
+    - light.family_room_lamp
+
+Front entry lights:
+  entities:
+    - light.closest_to_front_door
+    - light.closest_to_laundry
+
+Upstairs lights:
+  entities:
+    - light.upstairs_tv_room_1
+    - light.upstairs_tv_room_2
+    - light.upstairs_tv_room_3
+
+Outdoor Party Lights:
+  entities:
+    - light.backyard_party  

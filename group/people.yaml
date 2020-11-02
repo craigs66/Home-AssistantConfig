@@ -1,0 +1,4 @@
+family:
+  entities:
+    - device_tracker.iphone
+    - device_tracker.lisa_iphone_11

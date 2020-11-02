@@ -1,0 +1,16 @@
+Interior_Switches:
+  entities:
+    - switch.012008286001949488f8
+
+Outdoor_Front_Switches:
+  entities:
+    - switch.front_porch
+
+Outdoor_Back_Switches:
+  entities:
+    - switch.back_patio
+    - switch.backyardpartylights
+
+Garage_switches:
+  entities:
+    - switch.garage_light

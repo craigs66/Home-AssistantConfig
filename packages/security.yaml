@@ -1,0 +1,101 @@
+alarm_control_panel:
+  - platform: manual
+    name: "Home Alarm"
+    code: !secret alarm_code
+    arming_time: 60
+    trigger_time: 120
+    delay_time: 30
+    disarm_after_trigger: false
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 0
+
+konnected:
+  access_token: !secret konnected_access_password
+  api_host: http://10.10.2.15:8123
+  devices:
+    - id: cc50e35d213b
+      host: 10.10.2.21
+      port: 14103
+      binary_sensors:
+        - zone: 1
+          type: door
+          name: 'Front Door'
+        - zone: 2
+          type: door
+          name: 'Garage Door'
+        - zone: 3
+          type: window
+          name: 'Dining Room Right Window'
+        - zone: 4
+          type: window
+          name: 'Dining Room Left Window'
+        - zone: 5
+          type: window
+          name: 'Wine Room Left Window'
+        - zone: 6
+          type: window
+          name: 'Wine Room Right Window'
+      switches:
+        - zone: out
+          name: 'siren'
+    - id: cc50e35d9bb1
+      host: 10.10.2.22
+      port: 14134
+      binary_sensors:
+        - zone: 1
+          type: window
+          name: 'Kitchen Right Side Window'
+        - zone: 2
+          type: window
+          name: 'Kitchen Right Back Window'
+        - zone: 3
+          type: window
+          name: 'Kitchen Left Side Window'
+        - zone: 4
+          type: window
+          name: 'Kitchen Left Back Window'
+        - zone: 5
+          type: door
+          name: 'Back Door'
+        - zone: 6
+          type: window
+          name: 'Master Bedroom Left Window'
+    - id: 840d8e8cf4fa
+      host: 10.10.2.23
+      port: 17237
+      binary_sensors:
+        - zone: 1
+          type: window
+          name: 'Upstairs Windows'
+        - zone: 2
+          type: window
+          name: 'Family Room Windows'
+
+stream:
+
+ffmpeg:
+
+camera:
+ - platform: generic
+   name: Back Yard Camera
+   still_image_url: http://10.10.2.4/snap.jpeg
+   stream_source: rtsp://10.10.2.6:7447/mNenpFSiLMmbBYzh
+   verify_ssl: false
+ - platform: generic
+   name: Front Yard Camera
+   still_image_url: http://10.10.2.3/snap.jpeg
+   stream_source: rtsp://10.10.2.6:7447/GsT9u6Vo6Xzn7Wd5
+   verify_ssl: false
+ - platform: generic
+   name: Front Door Camera
+   still_image_url: http://10.10.2.5/snap.jpeg
+   stream_source: rtsp://10.10.2.6:7447/Dp2a6KR3hRhcuVc2
+   verify_ssl: false
+ - platform: generic
+   name: Garage
+   still_image_url: http://10.10.2.2/snap.jpeg
+   stream_source: rtsp://10.10.2.6:7447/1qd5z6vPEqx4YZcZ
+   verify_ssl: false

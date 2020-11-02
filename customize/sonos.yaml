@@ -1,0 +1,28 @@
+        ##########################################################
+        ## Sonos
+        ##########################################################
+
+  media_player.sonos_bathroom:
+    icon: mdi:speaker
+    friendly_name: Bathroom Sonos
+  media_player.sonos_family_room_2:
+    icon: mdi:speaker
+    friendly_name: Family Room Sonos
+  media_player.sonos_garage:
+    icon: mdi:speaker
+    friendly_name: Garage Sonos
+  media_player.sonos_kitchen:
+    icon: mdi:speaker
+    friendly_name: Kitchen Sonos
+  media_player.sonos_kitchen_2:
+    icon: mdi:speaker
+    friendly_name: Kitchen 2 Sonos
+  media_player.sonos_master_bedroom_2:
+    icon: mdi:speaker
+    friendly_name: Master Bedroom 2 Sonos
+  media_player.sonos_tv_playbar:
+    icon: mdi:speaker
+    friendly_name: TV Playbar Sonos
+  media_player.sonos_upstairs:
+    icon: mdi:speaker
+    friendly_name: Upstairs Sonos

@@ -1,0 +1,134 @@
+#triggers
+good_night:
+  name: Good Night
+  initial: off
+  icon: mdi:sleep
+
+good_morning:
+  name: Good Morning
+  initial: off
+  icon: mdi:weather-sunset-up
+
+meal_time:
+  name: Meal Time
+  initial: off
+
+tv_time:
+  name: TV Time
+  initial: off
+
+work:
+  name: Work
+  initial: off
+
+flash:
+  name: Flash
+  initial: off
+
+color_tornado:
+  name: Color Tornado!
+  initial: off
+
+guard_dog:
+  name: Guard Dog
+  initial: off
+
+disable_home_away:
+  name: Disable Home / Away Automation
+  initial: off
+  icon: mdi:map-marker-off
+
+family_room_tv:
+  name: Family Room TV On
+
+group_all_sonos:
+  name: Play on all Speakers
+  icon: mdi:speaker
+
+disable_craig_auto_garage:
+  name: Disable Craig Garage Automation
+  icon: mdi:car
+
+disable_lisa_auto_garage:
+  name: Disable Lisa Garage Automation
+  icon: mdi:car
+
+craig_garage_door:
+  name: Craig Garage Door
+  icon: mdi:garage-open
+  initial: off
+
+lisa_garage_door:
+  name: Lisa Garage Door
+  icon: mdi:garage-open
+  initial: off
+
+lisa_greeting:
+  name: Lisa Greeting Enabled
+  initial: on
+
+craig_greeting:
+  name: Craig Greeting Enabled
+  initial: on
+
+amanda_greeting:
+  name: Amanda Greeting Enabled
+  initial: on
+
+phil_greeting:
+  name: Phil Greeting Enabled
+  initial: on
+
+david_greeting:
+  name: David Greeting Enabled
+  initial: on
+
+disable_notifications:
+  name: Disable Notifications
+  icon: mdi:comment-text-outline
+
+lisa_away:
+  name: Lisa Away
+  icon: mdi:walk
+
+craig_away:
+  name: Craig Away
+  icon: mdi:walk
+
+lisa_home:
+  name: Lisa Home
+  icon: mdi:walk
+
+craig_home:
+  name: Craig Home
+  icon: mdi:walk
+
+manual_lisa_away:
+  name: Manually set Lisa Away
+  initial: off
+  icon: mdi:map-marker-minus
+
+manual_craig_away:
+  name: Manually set Craig Away
+  initial: off
+  icon: mdi:map-marker-minus
+
+vacation_mode:
+  name: Vacation Mode
+  icon: mdi:airplane
+
+guest_mode:
+  name: Guest Mode
+  icon: mdi:human-male-female
+
+justin_timberlake_music:
+  name: Play Justin Timberlake Station
+  icon: mdi:music
+
+miranda_lambert_music:
+  name: Play Miranda Lambert Station
+  icon: mdi:music
+
+live_acoustic_music:
+  name: Play Live & Acoustic Station
+  icon: mdi:music

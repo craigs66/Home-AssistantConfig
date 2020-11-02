@@ -1,0 +1,11 @@
+Interior_Lights:
+  entities:
+    - group.Master_Bedroom_lights
+    - group.Master_Bathroom_lights
+    - group.Living_Room_lights
+    - group.Front_entry_lights
+    - group.Upstairs_lights
+
+# Exterior_Switches:
+#  entities:
+#    - group.Outdoor_Party_Lights

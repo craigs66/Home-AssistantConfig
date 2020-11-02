@@ -1,0 +1,160 @@
+- alias: 'Lisa Leaving for work open garage and turn on garage light for 10 minutes'
+  trigger:
+    - platform: state
+      entity_id: input_boolean.lisa_garage_door
+      to: 'on'
+      from: 'off'
+
+#  condition:
+#    - condition: state
+#      entity_id: cover.lisa_garage
+#      state: 'closed'
+#
+  action:
+    - service: switch.turn_on
+      entity_id: switch.garage_light
+    - delay: 00:00:03
+    - service: cover.open_cover
+      entity_id: cover.lisa_garage
+    - delay: 00:10:00
+    - service: switch.turn_off
+      entity_id: switch.garage_light
+
+        ##########################################################
+        ## Reset Dummy Garage Door Switch
+        ##########################################################
+
+- alias: 'Lisa Garage - Reset Dummy Switch when Closed'
+  trigger:
+    - platform: state
+      entity_id: cover.lisa_garage
+      to: 'closed'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.lisa_garage_door
+
+
+#- alias: Garage - Close Craig Door After 30 Mins
+#
+#  trigger:
+#    - platform: state
+#      entity_id: cover.craig_garage
+#      to: 'open'
+#      for:
+#        hours: 0
+#        minutes: 30
+#        seconds: 0
+
+#  condition:
+#    - condition: state
+#      entity_id: input_boolean.disable_craig_auto_garage
+#      state: 'off'
+
+#  action:
+#    - service: cover.close_cover
+#      entity_id: cover.craig_garage
+
+
+        ##########################################################
+        ## Garage Door Open on Demand (Echo Integration)
+        ##########################################################
+
+- alias: Garage - Open Lisa Door on Demand
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.lisa_garage_door
+      to: 'on'
+
+  condition:
+    - condition: state
+      entity_id: cover.lisa_garage
+      state: 'closed'
+
+  action:
+    - service: cover.open_cover
+      entity_id: cover.lisa_garage
+
+- alias: Garage - Open Craig Door on Demand
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.craig_garage_door
+      to: 'on'
+
+  condition:
+    - condition: state
+      entity_id: cover.craig_garage
+      state: 'closed'
+
+  action:
+    - service: cover.open_cover
+      entity_id: cover.craig_garage
+
+        ##########################################################
+        ## Garage Door Close on Demand (Echo Integration)
+        ##########################################################
+
+- alias: Garage - Close Lisa Door on Demand
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.lisa_garage_door
+
+  condition:
+    - condition: state
+      entity_id: cover.garage_door
+      state: 'open'
+
+  action:
+    - service: cover.close_cover
+      entity_id: cover.lisa_garage
+
+        ##########################################################
+        ## Reset Dummy Garage Door Switch
+        ##########################################################
+
+- alias: Lisa Garage - Reset Dummy Switch when Closed
+
+  trigger:
+    - platform: state
+      entity_id: cover.lisa_garage
+      to: 'closed'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.lisa_garage_door
+
+- alias: Craig Garage - Reset Dummy Switch when Closed
+
+  trigger:
+    - platform: state
+      entity_id: cover.craig_garage
+      to: 'closed'
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.craig_garage_door
+
+- alias: Turn on Lisa Garage Door when Open
+
+  trigger:
+    - platform: state
+      entity_id: cover.lisa_garage
+      to: 'open'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.lisa_garage_door
+
+- alias: Turn on Craig Garage Door when Open
+
+  trigger:
+    - platform: state
+      entity_id: cover.craig_garage
+      to: 'open'
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id: input_boolean.craig_garage_door

@@ -1,0 +1,32 @@
+######################################################################
+##  Routines that happen at sunrise.
+######################################################################
+
+- alias: Turn off the lights and open the shades when the sun rises
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "+00:00:00"
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.family_room_lamp
+        - light.upstairs_tv_room_3
+        - light.closest_to_front_door
+        - light.closest_to_laundry
+        - light.upstairs_tv_room_2
+        - light.upstairs_tv_room_1
+        - light.bathroom
+        - light.lamp_on_lisas_side
+        - light.lamp_on_craigs_side
+        - light.fireplace
+        - light.front_porch_yeelight
+    - service: switch.turn_off
+      entity_id:
+        - group.Interior_Switches
+#        - group.Outdoor_Front_Switches
+        - group.Outdoor_Back_Switches   
+    - service: cover.open_cover
+      entity_id:
+        - cover.all_shades
+        - cover.back_kitchen_windows

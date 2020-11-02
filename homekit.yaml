@@ -1,0 +1,42 @@
+#################################################################
+## HomeKit
+#################################################################
+
+  auto_start: false
+
+  filter:
+    exclude_domains:
+      - light
+      - device_tracker
+      - input_boolean
+      - remote
+      - script
+      - alarm_control_panel
+      - sensor
+      - automation
+      - media_player
+      - binary_sensor
+      - scene
+      - person
+    include_entities:
+      - cover.lisa_garage
+      - cover.craig_garage
+      - light.lamp_on_lisas_side
+      - light.lamp_on_craigs_side
+      - light.bathroom
+      - light.kitchen_main
+      - light.kitchen_table
+      - light.dining_room
+      - light.fireplace
+      - light.family_room_lamp
+      - light.closest_to_front_door
+      - light.closest_to_laundry
+      - light.upstairs_tv_room_1
+      - light.upstairs_tv_room_2
+      - light.upstairs_tv_room_3
+      - light.backyard_party
+      - switch.fr_corner_cabinet
+      - switch.front_porch
+      - switch.back_patio
+      - switch.backyardpartylights
+      - switch.garage_light

@@ -1,0 +1,243 @@
+#####
+#
+####
+
+        ##########################################################
+        ## Set Lisa Away after 1 Min
+        ##########################################################
+
+- alias: Location - Set Lisa Away after 1 Mins
+
+  trigger:
+    - platform: state
+      entity_id: person.lisa
+      from: 'home'
+      to: 'away'
+      for:
+        hours: 0
+        minutes: 1
+        seconds: 0
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id:
+        - input_boolean.lisa_away
+        - input_boolean.lisa_greeting
+
+        ##########################################################
+        ## Set Craig Away after 1 Min
+        ##########################################################
+
+- alias: Location - Set Craig Away after 1 Mins
+
+  trigger:
+    - platform: state
+      entity_id: person.craig
+      from: 'home'
+      to: 'away'
+      for:
+        hours: 0
+        minutes: 1
+        seconds: 0
+
+  action:
+    - service: homeassistant.turn_on
+      entity_id:
+        - input_boolean.craig_away
+        - input_boolean.craig_greeting
+
+        ##########################################################
+        ## Set Lisa Home after 2 Mins
+        ##########################################################
+
+- alias: Location - Set Lisa Home after 2 Mins
+
+  trigger:
+    - platform: state
+      entity_id: person.lisa
+      from: 'away'
+      to: 'home'
+      for:
+        hours: 0
+        minutes: 2
+        seconds: 0
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.lisa_away
+        - input_boolean.lisa_greeting
+
+        ##########################################################
+        ## Set Craig Home after 2 Mins
+        ##########################################################
+
+- alias: Location - Set Craig Home after 2 Mins
+
+  trigger:
+    - platform: state
+      entity_id: person.craig
+      from: 'away'
+      to: 'home'
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id:
+        - input_boolean.craig_away
+        - input_boolean.craig_greeting
+
+        ##########################################################
+        ## Manually Set Lisa Home
+        ##########################################################
+
+- alias: Location - Manually Set Lisa Home
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.lisa_home
+      from: 'off'
+      to: 'on'
+
+  action:
+    - service: device_tracker.see
+      data:
+        dev_id: lisas_iphone_7
+        location_name: 'home'
+
+        ##########################################################
+        ## Manually Set Craig Home
+        ##########################################################
+
+- alias: Location - Manually Set Craig Home
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.craig_home
+      from: 'off'
+      to: 'on'
+
+  action:
+    - service: device_tracker.see
+      data:
+        dev_id: craigiphonex
+        location_name: 'home'
+
+        ##########################################################
+        ## Reset Manually Set Lisa Home Switch
+        ##########################################################
+
+- alias: Location - Reset Lisa Home
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.lisa_home
+      from: 'off'
+      to: 'on'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.lisa_home
+
+        ##########################################################
+        ## Reset Manually Set Craig Home Switch
+        ##########################################################
+
+- alias: Location - Reset Craig Home
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.craig_home
+      from: 'off'
+      to: 'on'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.craig_home
+
+        ##########################################################
+        ## Manually Set Lisa Away
+        ##########################################################
+
+- alias: Location - Manually Set Lisa Away
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.manual_lisa_away
+      from: 'off'
+      to: 'on'
+
+  action:
+    - service: device_tracker.see
+      data:
+        dev_id: lisas_iphone_7
+        location_name: 'away'
+
+         ##########################################################
+         ## Manually Set Craig Away
+         ##########################################################
+
+- alias: Location - Manually Set Craig Away
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.manual_craig_away
+      from: 'off'
+      to: 'on'
+
+  action:
+    - service: device_tracker.see
+      data:
+        dev_id: craigiphonex
+        location_name: 'away'
+
+         ##########################################################
+         ## Reset Manually Set Lisa Away Switch
+         ##########################################################
+
+- alias: Location - Reset Manually Set Lisa Away
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.manual_lisa_away
+      from: 'off'
+      to: 'on'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.manual_lisa_away
+
+         ##########################################################
+         ## Reset Manually Set Craig Away Switch
+         ##########################################################
+
+- alias: Location - Reset Manually Set Craig Away
+
+  trigger:
+    - platform: state
+      entity_id: input_boolean.manual_craig_away
+      from: 'off'
+      to: 'on'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 30
+
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.manual_craig_away

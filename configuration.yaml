@@ -1,0 +1,219 @@
+homeassistant:
+  name: Casa Del Vino
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 231
+  unit_system: imperial
+  time_zone: America/Chicago
+  customize: !include_dir_merge_named customize
+  customize_domain:
+    automation:
+      initial_state: 'on'
+  packages: !include_dir_named packages
+  whitelist_external_dirs:
+    - /config/www
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+ssdp:
+zeroconf:
+# config:
+person:
+system_health:
+mobile_app:
+discovery:
+  ignore:
+    - harmony
+    - apple_tv
+lovelace:
+  mode: yaml
+folder_watcher:
+  - folder: /config/www
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api
+    allowed_chat_ids:
+      - !secret telegram_chat_id_allowed
+
+# frontend:
+#  javascript_version: latest
+
+# Show the introduction message on startup.
+# introduction:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+http:
+#  base_url: !secret http_base_url
+#  ssl_certificate: !secret ssl_cert
+#  ssl_key: !secret ssl_key
+
+zone:
+  - name: Lisa Work
+    latitude: 30.304570
+    longitude: -97.742440
+    radius: 150
+    icon: mdi:emoticon-poop
+  - name: Home
+    latitude: !secret latitude
+    longitude: !secret longitude
+    radius: 100
+    icon: mdi:castle
+  - name: Craig Work
+    latitude: 30.268876
+    longitude: -97.740564
+    icon: mdi:cellphone
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_key
+    mode: daily
+
+updater:
+  include_used_components: true
+
+# Text to speech
+tts:
+  - platform: amazon_polly
+    aws_access_key_id: !secret aws_access_key_ID
+    aws_secret_access_key: !secret aws_secret_access_key
+
+zwave:
+    usb_path: /dev/ttyACM0
+
+# tuya:
+#  username: !secret tuya_username
+#  password: !secret tuya_password
+#  country_code: 1
+
+#cloud:
+#  alexa:
+#    filter:
+#      include_entities:
+#        - light.family_room_lamp
+#        - light.upstairs_tv_room_3
+#        - light.closest_to_front_door
+#        - light.closest_to_laundry
+#        - light.upstairs_tv_room_2
+#        - light.upstairs_tv_room_1
+#        - light.bathroom
+#        - light.lamp_on_lisas_side
+#        - light.lamp_on_craigs_side
+#        - light.kitchen_main
+#        - light.kitchen_table
+#        - light.dining_room
+#        - light.fireplace
+#        - switch.front_porch
+#        - switch.back_patio
+#        - switch.fr_corner_cabinet
+#        - switch.backyard_party
+#        - switch.front_porch_fountain
+#        - cover.lisa_garage
+#        - cover.craig_garage
+#      exclude_domains:
+#        - scene
+#        - media_player
+#        - sensor
+#    entity_config:
+#      cover.lisa_garage:
+#        name: Lisas Garage Door
+#        display_categories: Door
+#      cover.craig_garage:
+#        name: Craigs Garage Door
+#        display_categories: Door
+
+speedtestdotnet:
+  scan_interval:
+    minutes: 30
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
+climate:
+  platform: nest
+
+#apple_tv:
+# - name: Master Bedroom Apple TV
+#   host: 10.10.2.11
+#   login_id: !secret apple_tv_login_id
+#    credentials: !secret apple_tv_cred
+#   start_off: false
+# - name: Family Room Apple TV
+#   host: 10.10.2.12
+#   login_id: !secret apple_tv_login_id
+#    credentials: !secret apple_tv_cred
+#   start_off: false
+# - name: Upstairs Family Room Apple TV
+#   host: 10.10.2.13
+#   login_id: !secret apple_tv_login_id
+#    credentials: !secret apple_tv_upstairs_cred
+#   start_off: false
+# - name: Amandas Room Apple TV
+#   host: 10.10.2.14
+#   login_id: !secret apple_tv_login_id
+#    credentials: !secret apple_tv_cred
+#   start_off: false
+# - name: Guest Bedroom Apple TV
+#   host: 10.10.2.16
+#   login_id: !secret apple_tv_login_id
+#    credentials: !secret apple_tv_cred
+#   start_off: false
+
+remote:
+  - platform: harmony
+    name: Media Center
+    host: 10.10.2.17
+    activity: Watch TV
+
+emulated_hue:
+  host_ip: 10.10.2.15
+  listen_port: 8300
+  off_maps_to_on_domains:
+    - script
+    - scene
+  expose_by_default: false
+
+ifttt:
+  key: !secret ifttt_key
+
+pi_hole:
+  host: 10.10.2.29
+  location: admin
+  ssl: false
+  verify_ssl: false
+
+# I moved the image_processing to deepstack.yaml in /packages
+# image_processing:
+#  - platform: deepstack_object
+#    ip_address: 10.10.2.15
+#    port: 5000
+#    api_key: craigandlisa
+#    save_file_folder: /config/snapshots/
+#    save_timestamped_file: True
+#    # roi_x_min: 0.35
+#    roi_x_max: 0.8
+#    #roi_y_min: 0.4
+#    roi_y_max: 0.8
+#    targets:
+#      - person
+#      - car
+#    source:
+#      - entity_id: camera.front_yard_camera
+
+group: !include_dir_merge_named group
+scene: !include scenes.yaml
+automation: !include_dir_merge_list automation
+notify: !include notify.yaml
+sensor: !include sensors.yaml
+# script: !include_dir_merge_list script
+script: !include script.yaml
+input_boolean: !include_dir_merge_named input_boolean
+input_select: !include input_select.yaml
+homekit: !include homekit.yaml
+ios: !include ios.yaml
+switch: !include switch.yaml
